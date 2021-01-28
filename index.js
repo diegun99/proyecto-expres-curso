@@ -1,21 +1,34 @@
 const  express = require('express');
 const app = express();
 
+app.use(express.json());
 
-app.get('/',(req,res) => {
-    res.send('Peticion get recibido');
+app.all('/user', (req,res, next)=>{
+    console.log('por aqui paso');
+    next();
+})
+
+
+app.get('/user',(req,res) => {
+    res.json({
+        username : 'Cameron',
+        lastname : 'Howe'
+    });
 });
 
-app.post('/about',(req,res)=>{
-    res.send('post request recibido');
+app.post('/user/:id',(req,res)=>{
+    console.log(req.body);// recibe los datos que envia el cliente
+    console.log(req.params);
+    res.send('post request recibido');//responde algo
 });
 
-app.put('/about',(req,res)=>{
-    res.send('update request recibido');
+app.put('/user/:id',(req,res)=>{
+    console.log(req.body);
+    res.send(`User ${req.params.id} ha sido actualizado`);
 });
 
-app.delete('/about',(req,res)=>{
-    res.send('<h1>Delete request<h1>');
+app.delete('/user/:userId',(req,res)=>{
+    res.send(`User ${req.params.userId} ha sido eliminado`);
 });
 
 
