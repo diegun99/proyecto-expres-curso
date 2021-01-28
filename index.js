@@ -32,7 +32,7 @@ app.delete('/user/:userId',(req,res)=>{
 });
 
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log("server on port 3000");
 })
 
